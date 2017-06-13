@@ -53,15 +53,8 @@ if __name__ == '__main__':
     parser.add_argument(
         '--toggle', help='Toggle lulz mode', action='store_true'
     )
-    parser.add_argument(
-        '--debug', help='Print /etc/hosts after toggling', action='store_true'
-    )
 
     args = parser.parse_args()
 
     if args.toggle: toggle_lulz_mode()
     print('Lulzmode: {}'.format('✔' if is_lulz_mode() else '✖')) 
-
-    if args.debug:
-        print('*** Current /etc/hosts ***')
-        with open('/etc/hosts') as f: print(f.read())

@@ -2,14 +2,13 @@
 
 ```
 %> ./lulzmode --help
-usage: lulzmode [-h] [--toggle] [--debug]
+usage: lulzmode [-h] [--toggle]
 
 When your finals are close, blacklist distracting hosts.
 
 optional arguments:
   -h, --help  show this help message and exit
   --toggle    Toggle lulz mode
-  --debug     Print /etc/hosts after toggling
 ```
 
 Toggle lulz mode, when your finals are close. Specify the
