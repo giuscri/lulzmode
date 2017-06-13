@@ -12,7 +12,19 @@ optional arguments:
   --debug     Print /etc/hosts after toggling
 ```
 
-Toggle lulz mode, when your finals are close.
+Toggle lulz mode, when your finals are close. Specify the
+hosts you want to blacklist in a json
+
+```
+$ cat ~/.lulz_mode.blacklist.json
+[
+    "twitter.com",
+    "news.ycombinator.com",
+    "facebook.com",
+    "youtube.com",
+    "github.com"
+]
+```
 
 ## Example
 
@@ -29,7 +41,7 @@ Lulzmode: ✖
 0.0.0.0 twitter.com
 0.0.0.0 news.ycombinator.com
 0.0.0.0 facebook.com
-0.0.0.0 youtube.com$ 
+0.0.0.0 youtube.com
 ```
 
 ## Note
