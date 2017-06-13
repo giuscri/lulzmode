@@ -1,0 +1,63 @@
+#!/bin/env python3
+
+import json
+from os.path import isfile, expanduser
+
+HOSTS='/etc/hosts'
+BLACKLIST=expanduser('~/.lulz_mode.blacklist.json')
+
+def is_lulz_mode():
+    with open(HOSTS) as f: lines = f.readlines()
+    matches = len(tuple(filter(lambda l: 'UNLULZMODE' in l, lines)))
+    if matches > 1: raise AssertionError(
+        'Sorry. Unexpected /etc/hosts format. You need to manually '
+        'edit your /etc/hosts.'
+    )
+    return matches == 0
+
+def toggle_lulz_mode():
+    if not isfile(BLACKLIST): raise AssertionError(
+        f'Sorry. Missing {BLACKLIST}. You need to manually '
+        'edit your /etc/hosts.'
+    )
+
+    with open(BLACKLIST) as f: blacklist = json.loads(f.read())
+
+    if is_lulz_mode():
+        payload = ['# UNLULZMODE:']
+        for host in blacklist: payload.append(f'0.0.0.0 {host}')
+        with open(HOSTS, 'a') as f: f.write('\n' + '\n'.join(payload))
+
+    else:
+        with open(HOSTS) as f:
+            lines = list(map(lambda l: l.strip(), f.readlines()))
+
+        for host in blacklist:
+            formatted = f'0.0.0.0 {host}'
+            if formatted in lines: lines.remove(formatted)
+
+        lines.remove('# UNLULZMODE:')
+
+        with open(HOSTS, 'w+') as f: f.write('\n'.join(lines))
+
+
+if __name__ == '__main__':
+    from argparse import ArgumentParser
+    parser = ArgumentParser(
+        description='When your finals are close, blacklist distracting hosts.'
+    )
+    parser.add_argument(
+        '--toggle', help='Toggle lulz mode', action='store_true'
+    )
+    parser.add_argument(
+        '--debug', help='Print /etc/hosts after toggling', action='store_true'
+    )
+
+    args = parser.parse_args()
+
+    if args.toggle: toggle_lulz_mode()
+    print('Lulzmode: {}'.format('✔' if is_lulz_mode() else '✖')) 
+
+    if args.debug:
+        print('*** Current /etc/hosts ***')
+        with open('/etc/hosts') as f: print(f.read())
