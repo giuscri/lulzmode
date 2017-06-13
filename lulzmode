@@ -5,10 +5,12 @@ from os.path import isfile, expanduser
 
 HOSTS='/etc/hosts'
 BLACKLIST=expanduser('~/.lulz_mode.blacklist.json')
+HEADER='# Start of lulzmode blacklist'
+FOOTER='# End of lulzmode blacklist'
 
 def is_lulz_mode():
     with open(HOSTS) as f: lines = f.readlines()
-    matches = len(tuple(filter(lambda l: 'UNLULZMODE' in l, lines)))
+    matches = len(tuple(filter(lambda l: HEADER in l, lines)))
     if matches > 1: raise AssertionError(
         'Sorry. Unexpected /etc/hosts format. You need to manually '
         'edit your /etc/hosts.'
@@ -24,8 +26,9 @@ def toggle_lulz_mode():
     with open(BLACKLIST) as f: blacklist = json.loads(f.read())
 
     if is_lulz_mode():
-        payload = ['# UNLULZMODE:']
+        payload = [HEADER]
         for host in blacklist: payload.append(f'0.0.0.0 {host}')
+        payload.append(FOOTER)
         with open(HOSTS, 'a') as f: f.write('\n' + '\n'.join(payload))
 
     else:
@@ -36,7 +39,8 @@ def toggle_lulz_mode():
             formatted = f'0.0.0.0 {host}'
             if formatted in lines: lines.remove(formatted)
 
-        lines.remove('# UNLULZMODE:')
+        lines.remove(HEADER)
+        lines.remove(FOOTER)
 
         with open(HOSTS, 'w+') as f: f.write('\n'.join(lines))
 
