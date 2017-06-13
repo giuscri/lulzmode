@@ -34,7 +34,10 @@ def toggle_lulz_mode():
         payload = [HEADER]
         for host in blacklist: payload.append(f'0.0.0.0 {host}')
         payload.append(FOOTER)
-        with open(HOSTS, 'a') as f: f.write('\n' + '\n'.join(payload))
+
+        with open(HOSTS) as f: lines = f.readlines()
+        payload.extend(lines)
+        with open(HOSTS, 'w') as f: f.write('\n'.join(payload))
 
     else:
         with open(HOSTS) as f:
@@ -47,7 +50,7 @@ def toggle_lulz_mode():
         lines.remove(HEADER)
         lines.remove(FOOTER)
 
-        with open(HOSTS, 'w+') as f: f.write('\n'.join(lines))
+        with open(HOSTS, 'w') as f: f.write('\n'.join(lines))
 
 
 if __name__ == '__main__':

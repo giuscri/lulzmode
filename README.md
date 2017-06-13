@@ -30,11 +30,11 @@ $ cat ~/.lulz_mode.blacklist.json
 ```
 %> ./lulzmode 
 Lulzmode: ✔
-%> cat /etc/hosts 
+%> cat /etc/hosts; echo
 127.0.0.1 localhost
 %> ./lulzmode --toggle
 Lulzmode: ✖
-%> cat /etc/hosts 
+%> cat /etc/hosts; echo
 127.0.0.1 localhost
 # >>> blacklist
 0.0.0.0 twitter.com
