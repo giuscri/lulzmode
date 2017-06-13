@@ -34,12 +34,12 @@ $ cat ~/.lulz_mode.blacklist.json
 ## Example
 
 ```
-%> ./lulzmode 
-Lulzmode: ✔
+%> ./lulzmode
+Are you allowed to lulz? ✔ Sure.
 %> cat /etc/hosts; echo
 127.0.0.1 localhost
 %> ./lulzmode --toggle
-Lulzmode: ✖
+Are you allowed to lulz? ✖ No.
 %> cat /etc/hosts; echo
 127.0.0.1 localhost
 # >>> blacklist

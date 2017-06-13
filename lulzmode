@@ -65,4 +65,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.toggle: toggle_lulz_mode()
-    print('Lulzmode: {}'.format('✔' if is_lulz_mode() else '✖')) 
+    print('Are you allowed to lulz? {}'.format('✔ Sure.' if is_lulz_mode() else '✖ No.')) 
