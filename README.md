@@ -25,6 +25,12 @@ $ cat ~/.lulz_mode.blacklist.json
 ]
 ```
 
+## Install
+
+```
+# make install PREFIX=/usr/local
+```
+
 ## Example
 
 ```
