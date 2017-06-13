@@ -9,20 +9,24 @@ BLACKLIST=expanduser('~/.lulz_mode.blacklist.json')
 HEADER='# >>> blacklist'
 FOOTER='# <<< blacklist'
 
+class HostsFormatError(Exception):
+    def __init__(self, message):
+        self.message = \
+        'Unexpected /etc/hosts format. You need to manually edit /etc/hosts'
+
+class NoBlacklistError(Exception):
+    def __init__(self, message):
+        self.message = \
+        f'Sorry. Missing {BLACKLIST}. You need to manually edit your /etc/hosts.'
+
 def is_lulz_mode():
     with open(HOSTS) as f: lines = f.readlines()
     matches = len(tuple(filter(lambda l: HEADER in l, lines)))
-    if matches > 1: raise AssertionError(
-        'Sorry. Unexpected /etc/hosts format. You need to manually '
-        'edit your /etc/hosts.'
-    )
+    if matches > 1: raise HostsFormatError()
     return matches == 0
 
 def toggle_lulz_mode():
-    if not isfile(BLACKLIST): raise AssertionError(
-        f'Sorry. Missing {BLACKLIST}. You need to manually '
-        'edit your /etc/hosts.'
-    )
+    if not isfile(BLACKLIST): raise NoBlacklistError()
 
     with open(BLACKLIST) as f: blacklist = json.loads(f.read())
 
