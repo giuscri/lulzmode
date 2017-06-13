@@ -36,11 +36,13 @@ Lulzmode: ✔
 Lulzmode: ✖
 %> cat /etc/hosts 
 127.0.0.1 localhost
-# UNLULZMODE:
+# >>> blacklist
 0.0.0.0 twitter.com
 0.0.0.0 news.ycombinator.com
 0.0.0.0 facebook.com
 0.0.0.0 youtube.com
+0.0.0.0 github.com
+# <<< blacklist
 ```
 
 ## Note

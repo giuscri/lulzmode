@@ -5,8 +5,9 @@ from os.path import isfile, expanduser
 
 HOSTS='/etc/hosts'
 BLACKLIST=expanduser('~/.lulz_mode.blacklist.json')
-HEADER='# Start of lulzmode blacklist'
-FOOTER='# End of lulzmode blacklist'
+
+HEADER='# >>> blacklist'
+FOOTER='# <<< blacklist'
 
 def is_lulz_mode():
     with open(HOSTS) as f: lines = f.readlines()
