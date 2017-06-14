@@ -62,3 +62,11 @@ group and
 # chown root:wheel /etc/hosts
 # chmod g+w /etc/hosts
 ```
+
+## Contributors
+
+Any kind of contributions are welcome of course! Check out
+
+```
+https://github.com/giuscri/lulzmode/issues?q=is:issue+is:open+label:enhancement
+```
